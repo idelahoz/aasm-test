@@ -1,0 +1,35 @@
+<h1><%= @project.name %></h1>
+
+<p>Estado actual: <%= @project.aasm.current_state %></p>
+
+<% if @project.may_start_planning? %>
+  <%= form_with url: start_planning_project_path(@project), method: :patch do %>
+    <%= submit_tag 'Empezar Planificación' %>
+  <% end %>
+<% end %>
+
+<% if @project.may_start_development? %>
+  <%= form_with url: start_development_project_path(@project), method: :patch do %>
+    <%= submit_tag 'Empezar Desarrollo' %>
+  <% end %>
+<% end %>
+
+<% if @project.may_complete? %>
+  <%= form_with url: complete_project_path(@project), method: :patch do %>
+    <%= submit_tag 'Completar Proyecto' %>
+  <% end %>
+<% end %>
+
+<% if @project.may_archive? %>
+  <%= form_with url: archive_project_path(@project), method: :patch do %>
+    <%= submit_tag 'Archivar Proyecto' %>
+  <% end %>
+<% end %>
+
+<% if @project.may_reopen? %>
+  <%= form_with url: reopen_project_path(@project), method: :patch do %>
+    <%= submit_tag 'Reabrir Proyecto' %>
+  <% end %>
+<% end %>
+
+<%= link_to 'Volver a la lista', projects_path %>
